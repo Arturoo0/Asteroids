@@ -18,7 +18,6 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
-        print(self.getPlayerAngle())
         self.computeMovement(dt)
     
     def trackKeyPresses(self, event):
