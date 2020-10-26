@@ -31,7 +31,7 @@ class Player:
         for k,v in self.keysHeld.items():
             if v:
                 if k == 'a': self.rotate(self.computeCentroid(), -1.5 * dt)
-                if k == 'w': self.shiftPlayerForward(20, dt)
+                if k == 'w': self.shiftPlayerForward(self.getPlayerAngle(), dt)
                 if k == 'd': self.rotate(self.computeCentroid(), 1.5 * dt)
     
     def computeCentroid(self):
@@ -58,12 +58,12 @@ class Player:
         centX, centY = self.computeCentroid()
         dx = self.polygonRepresentation[0][0] - centX
         dy = self.polygonRepresentation[0][1] - centY
-        return math.degrees(math.atan2(dy, dx))
+        return (math.atan2(dy, dx))
     
     def shiftPlayerForward(self, angle, dt):
         for point in self.polygonRepresentation:
-            point[0] = (self.speed * dt) * math.cos(100 * math.pi / 180)
-            point[1] = (self.speed * dt) * math.cos(100 * math.pi / 180)
+            point[0] += (self.speed * dt) * math.cos(angle)
+            point[1] += (self.speed * dt) * math.sin(angle)
 
 
     
