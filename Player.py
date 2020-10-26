@@ -18,6 +18,7 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
+        print(self.getPlayerAngle())
         self.computeMovement(dt)
     
     def trackKeyPresses(self, event):
@@ -52,11 +53,18 @@ class Player:
 
             point[0] = rx + ox
             point[1] = ry + oy
+        
+    def getPlayerAngle(self):
+        centX, centY = self.computeCentroid()
+        dx = self.polygonRepresentation[0][0] - centX
+        dy = self.polygonRepresentation[0][1] - centY
+        return math.degrees(math.atan2(dy, dx))
     
     def shiftPlayerForward(self, angle, dt):
         for point in self.polygonRepresentation:
             point[0] = (self.speed * dt) * math.cos(100 * math.pi / 180)
             point[1] = (self.speed * dt) * math.cos(100 * math.pi / 180)
+
 
     
     
