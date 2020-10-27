@@ -1,8 +1,10 @@
 import pygame
 import Draw as draw
 import math
+import Projectile
 class Player:
     def __init__(self, displayCtx, velocity):
+        self.projectile = Projectile.Projectile(displayCtx)
         self.velocity = velocity
         self.displayCtx = displayCtx
         self.polygonRepresentation = [[30, 30], [45, 75], [15, 75]]
@@ -22,17 +24,22 @@ class Player:
     
     def trackKeyPresses(self, event):
         if event.type == pygame.KEYDOWN:
-            self.keysHeld[chr(event.key)] = True
+            if event.key == 32:
+                x = self.polygonRepresentation[0][0]
+                y = self.polygonRepresentation[0][1]
+                self.projectile.shoot(x, y, self.getPlayerAngle())
+            else:
+                self.keysHeld[chr(event.key)] = True
         if event.type == pygame.KEYUP:
             self.keysHeld[chr(event.key)] = False
-    
+
     def computeMovement(self, dt):
         for k,v in self.keysHeld.items():
             if v:
                 if k == 'a': self.rotate(self.computeCentroid(), -1.5 * dt)
                 if k == 'w': self.shiftPlayerForward(self.getPlayerAngle(), dt)
                 if k == 'd': self.rotate(self.computeCentroid(), 1.5 * dt)
-    
+
     def computeCentroid(self):
         centroidX = 0
         centroidY = 0

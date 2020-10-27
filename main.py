@@ -1,14 +1,16 @@
 import pygame
 import Player
 import Asteroid
+import Projectile
 
 def main():
     pygame.init()
-
     clock = pygame.time.Clock()
     display = pygame.display.set_mode((800, 600))
+
     mainPlayer = Player.Player(display, 10)
     asteroid = Asteroid.Asteroid(display)
+    projectiles = Projectile.Projectile(display)
     
     running = True
 
@@ -25,8 +27,10 @@ def main():
 
         asteroid.update(dt)
         asteroid.draw()
+
+        projectiles.update(dt)
+        projectiles.draw()
         
-        mainPlayer.draw()
         pygame.display.update()
 
 if __name__== "__main__":
