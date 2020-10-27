@@ -1,8 +1,8 @@
 import random
 import Draw as draw
 import copy
+import Entities
 class Asteroid:
-    asteroidEntities = []
     callInterval = 0
     size = 30
     xSpeed = 45
@@ -18,21 +18,21 @@ class Asteroid:
         self.pruneEntities(dt)
     
     def draw(self):
-        for asteroid in self.asteroidEntities:
+        for asteroid in Entities.asteroids:
             draw.drawRect(self.displayCtx, (255, 255, 255), (asteroid[0], asteroid[1], self.size, self.size), fillType=1)
  
     def pruneEntities(self, dt):
         newEntities = []
-        for asteroid in self.asteroidEntities:
+        for asteroid in Entities.asteroids:
             if asteroid[-1] == 0 and self.inScreen(asteroid):
                 asteroid[-1] += 1
-            if asteroid[-1] == 1 and not self.inScreen(asteroid):
+            if asteroid[-1] == 1 and not self.inScreen(asteroid) or asteroid[-1] == 2:
                 asteroid[-1] = 2
                 continue
             asteroid[0] += asteroid[2] * dt
             asteroid[1] += asteroid[3] * dt
             newEntities.append(asteroid)
-        self.asteroidEntities = copy.deepcopy(newEntities)
+        Entities.asteroids = copy.deepcopy(newEntities)
 
     def inScreen(self, asteroid):
         x, y = asteroid[0], asteroid[1]
@@ -58,4 +58,4 @@ class Asteroid:
             self.addAsteroid(x, 620, random.randint(-5,5), -self.ySpeed)
 
     def addAsteroid(self, x, y, xComponent, yComponent):
-        self.asteroidEntities.append([x, y, xComponent, yComponent, 0])
+        Entities.asteroids.append([x, y, xComponent, yComponent, 0])
