@@ -2,6 +2,7 @@ import random
 import Draw as draw
 import copy
 import Entities
+
 class Asteroid:
     callInterval = 0
     size = 30

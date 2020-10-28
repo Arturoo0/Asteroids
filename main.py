@@ -2,6 +2,7 @@ import pygame
 import Player
 import Asteroid
 import Projectile
+import Scoreboard
 
 def main():
     pygame.init()
@@ -11,6 +12,7 @@ def main():
     mainPlayer = Player.Player(display, 10)
     asteroid = Asteroid.Asteroid(display)
     projectiles = Projectile.Projectile(display)
+    scoreboard = Scoreboard.Scoreboard(display)
     
     running = True
 
@@ -30,6 +32,8 @@ def main():
 
         projectiles.update(dt)
         projectiles.draw()
+
+        scoreboard.draw()
         
         pygame.display.update()
 
