@@ -3,6 +3,7 @@ import math
 from GameState import gameState
 import Entities
 from Asteroid import Asteroid 
+
 class Projectile:
     drawCtx = None
     size = 5

@@ -7,7 +7,7 @@ class Player:
         self.projectile = Projectile.Projectile(displayCtx)
         self.velocity = velocity
         self.displayCtx = displayCtx
-        self.polygonRepresentation = [[30, 30], [45, 75], [15, 75]]
+        self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]
         self.speed = 30
         self.keysHeld = {
             'a' : False, 
