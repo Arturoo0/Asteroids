@@ -31,20 +31,13 @@ class Projectile:
     def checkCollisions(self):
         for asteroid in Entities.asteroids:
             for projectile in Entities.projectiles:
-                xCheck = False
-                yCheck = False
-                if projectile[0] >= asteroid[0]:
-                    if projectile[0] <= asteroid[0] + Asteroid.size: 
-                        xCheck = True
-                elif asteroid[0] >= projectile[0]:
-                    if asteroid[0] <= projectile[0] + self.size:
-                        xCheck = True
-                if projectile[1] >= asteroid[1]:
-                    if projectile[1] <= asteroid[1] + Asteroid.size: 
-                        yCheck = True
-                elif asteroid[1] >= projectile[1]:
-                    if asteroid[1] <= projectile[1] + self.size:
-                        yCheck = True
+                xCheck = True
+                yCheck = True
+            
+                if (projectile[0] >= asteroid[0] + Asteroid.size) or (asteroid[0] >= projectile[0] + self.size):
+                    xCheck = False 
+                if projectile[1] >= asteroid[1] + Asteroid.size or asteroid[1] >= projectile[1] + self.size:
+                    xCheck = False 
                 
                 if xCheck and yCheck:
                     gameState['score'] += 1
