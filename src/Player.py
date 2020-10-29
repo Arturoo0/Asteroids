@@ -2,6 +2,7 @@ import pygame
 import Draw as draw
 import math
 import Projectile
+
 class Player:
     def __init__(self, displayCtx, velocity):
         self.projectile = Projectile.Projectile(displayCtx)
