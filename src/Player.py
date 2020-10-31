@@ -13,7 +13,7 @@ class Player:
         self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]
         self.speed = 40
         self.deceleration = .99
-        self.acceleration = 1.05
+        self.acceleration = 1.09
         self.rotationSpeed = 1.5
         self.keysHeld = {
             'a' : False, 
@@ -26,7 +26,6 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
-        print(self.currentPlayerSpeed)
         self.computeMovement(dt)
         self.applyInertia(dt)
     
@@ -75,15 +74,17 @@ class Player:
         return (math.atan2(dy, dx))
     
     def shiftPlayerForward(self, angle, dt):
-        dx = (self.speed * dt) * math.cos(angle)
-        dy = (self.speed * dt) * math.sin(angle)
+        dx = (self.currentPlayerSpeed * dt) * math.cos(angle)
+        dy = (self.currentPlayerSpeed * dt) * math.sin(angle)
+
+        self.xVelocity = dx * 20
+        self.yVelocity = dy * 20
+
         if self.currentPlayerSpeed == 0: self.currentPlayerSpeed = 0.5
         if abs(self.currentPlayerSpeed < self.speed): self.currentPlayerSpeed *= self.acceleration
         for point in self.polygonRepresentation:
             point[0] += dx 
             point[1] += dy
-            self.xVelocity = dx * 20
-            self.yVelocity = dy * 20
     
     def applyInertia(self, dt):
         if not self.keysHeld['w'] and (abs(self.xVelocity > 0) or abs(self.yVelocity) > 0):
