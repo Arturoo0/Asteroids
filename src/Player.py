@@ -8,10 +8,12 @@ class Player:
         self.projectile = Projectile.Projectile(displayCtx)
         self.xVelocity = 0
         self.yVelocity = 0
+        self.currentPlayerSpeed = 0
         self.displayCtx = displayCtx
         self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]
-        self.speed = 30
+        self.speed = 40
         self.deceleration = .99
+        self.acceleration = 1.05
         self.rotationSpeed = 1.5
         self.keysHeld = {
             'a' : False, 
@@ -24,6 +26,7 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
+        print(self.currentPlayerSpeed)
         self.computeMovement(dt)
         self.applyInertia(dt)
     
@@ -72,12 +75,13 @@ class Player:
         return (math.atan2(dy, dx))
     
     def shiftPlayerForward(self, angle, dt):
+        dx = (self.speed * dt) * math.cos(angle)
+        dy = (self.speed * dt) * math.sin(angle)
+        if self.currentPlayerSpeed == 0: self.currentPlayerSpeed = 0.5
+        if abs(self.currentPlayerSpeed < self.speed): self.currentPlayerSpeed *= self.acceleration
         for point in self.polygonRepresentation:
-            dx = (self.speed * dt) * math.cos(angle)
-            dy = (self.speed * dt) * math.sin(angle)
             point[0] += dx 
             point[1] += dy
-
             self.xVelocity = dx * 20
             self.yVelocity = dy * 20
     
@@ -92,6 +96,7 @@ class Player:
 
             self.xVelocity *= self.deceleration
             self.yVelocity *= self.deceleration
+            self.currentPlayerSpeed *= self.deceleration
 
     
     
