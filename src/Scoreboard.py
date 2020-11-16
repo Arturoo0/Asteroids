@@ -8,7 +8,7 @@ class Scoreboard:
     def __init__(self, drawCtx):
         self.drawCtx = drawCtx
         self.fontCtx = pygame.font.SysFont("Times New Roman", 40)
-        self.lifePolyBaseCoords = [[700, 25], [690, 45], [710, 45l]]
+        self.lifePolyBaseCoords = [[700, 25], [690, 45], [710, 45]]
         self.lifeShift = 25
 
     def draw(self):

@@ -2,6 +2,9 @@ import pygame
 import Draw as draw
 import math
 import Projectile
+import Entities
+from Asteroid import Asteroid
+from GameState import gameState
 
 class Player:
     def __init__(self, displayCtx, velocity):
@@ -26,6 +29,7 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
+        self.detectPlayerCollision()
         self.computeMovement(dt)
         self.applyInertia(dt)
     
@@ -98,9 +102,16 @@ class Player:
             self.xVelocity *= self.deceleration
             self.yVelocity *= self.deceleration
             self.currentPlayerSpeed *= self.deceleration
-
     
-    
+    def detectPlayerCollision(self):
+        for coord in self.polygonRepresentation:
+            for asteroid in Entities.asteroids:
+                xCheck = coord[0] >= asteroid[0] and coord[0] <= asteroid[0] + Asteroid.size
+                yCheck = coord[1] >= asteroid[1] and coord[1] <= asteroid[1] + Asteroid.size
+                if xCheck and yCheck: 
+                    gameState['lives'] -= 1
+                    self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]
+                    return
     
 
 
