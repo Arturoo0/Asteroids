@@ -29,6 +29,7 @@ class Player:
         draw.drawPolygon(self.displayCtx, (255, 255, 255), self.polygonRepresentation, fillType=1)
 
     def update(self, dt):
+        self.mirrorPlayer()
         self.detectPlayerCollision()
         self.computeMovement(dt)
         self.applyInertia(dt)
@@ -112,6 +113,19 @@ class Player:
                     gameState['lives'] -= 1
                     self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]
                     return
+    
+    def mirrorPlayer(self):
+        mirrorX = True
+        mirrorY = True
+        for coord in self.polygonRepresentation:
+            if coord[0] > 0 and coord[0] < 800: mirrorX = False
+            if coord[1] > 0 and coord[1] < 600: mirrorY = False
+        if mirrorX:
+            for coord in self.polygonRepresentation:
+                coord[0] = abs(800 - coord[0])
+        if mirrorY:
+            for coord in self.polygonRepresentation:
+                coord[1] = abs(600 - coord[1])
     
 
 
