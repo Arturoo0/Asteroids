@@ -1,5 +1,5 @@
 gameState = {
     'score' : 0,
     'lives' : 3, 
-    'inMenu' : False
+    'inMenu' : True
 }
