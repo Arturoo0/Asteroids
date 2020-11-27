@@ -26,6 +26,7 @@ def main():
         display.fill((0, 0, 0))
         for event in pygame.event.get():
             mainPlayer.trackKeyPresses(event)
+            menu.trackKeyPresses(event)
             if event.type == pygame.QUIT:
                 running = False
 

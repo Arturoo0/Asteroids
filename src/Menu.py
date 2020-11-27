@@ -16,6 +16,13 @@ class Menu:
 	def draw(self):
 		self.drawStartButtonText()
 		self.drawStartButton()
+			
+	def trackKeyPresses(self, event):
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			x, y = pygame.mouse.get_pos()
+			xCheck = x >= self.startButtonTopLeft[0] and x <= self.startButtonTopLeft[0] + self.startButtonWidth
+			yCheck = y >= self.startButtonTopLeft[1] and y <= self.startButtonTopLeft[1] + self.startButtonHeight
+			if xCheck and yCheck: gameState['inMenu'] = False
 
 	def drawStartButtonText(self):
 		x, y = self.startTextTopLeft
