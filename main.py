@@ -43,6 +43,7 @@ def main():
             scoreboard.draw()
         else:
             menu.draw()
+            menu.update()
             
 
         pygame.display.update()
