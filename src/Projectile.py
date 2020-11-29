@@ -3,6 +3,7 @@ import math
 from GameState import gameState
 import Entities
 from Asteroids import Asteroids
+import random as r
 
 class Projectile:
     drawCtx = None
@@ -43,5 +44,8 @@ class Projectile:
                 if xCheck and yCheck:
                     gameState['score'] += 1
                     asteroid[-1] = 2
-                    if asteroid[-2] > self.asteroidObj: 
-                        self.asteroidObj.generateAsteroid(asteroid[-2]//2)
+                    if asteroid[-2] > self.asteroidObj.sizeLimit: 
+                        for i in range(2):
+                            newXComponent = asteroid[2] * r.uniform(.5,1)
+                            newYComponent = asteroid[3] * r.uniform(.5, 1)
+                            self.asteroidObj.addAsteroid(asteroid[0] + newXComponent, asteroid[1] + newYComponent, newXComponent, newYComponent, asteroid[-2]//2)
