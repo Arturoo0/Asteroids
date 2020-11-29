@@ -2,7 +2,7 @@ import Draw
 import math
 from GameState import gameState
 import Entities
-from Asteroid import Asteroid 
+from Asteroids import Asteroids
 
 class Projectile:
     drawCtx = None
@@ -11,6 +11,7 @@ class Projectile:
 
     def __init__(self, drawCtx):
         self.drawCtx = drawCtx
+        self.asteroidObj = Asteroids(drawCtx)
 
     def shoot(self, x, y, angle):
         Entities.projectiles.append([x, y, angle])
@@ -34,11 +35,12 @@ class Projectile:
                 xCheck = True
                 yCheck = True
             
-                if (projectile[0] >= asteroid[0] + Asteroid.size) or (asteroid[0] >= projectile[0] + self.size):
+                if (projectile[0] >= asteroid[0] + asteroid[-2]) or (asteroid[0] >= projectile[0] + self.size):
                     xCheck = False 
-                if projectile[1] >= asteroid[1] + Asteroid.size or asteroid[1] >= projectile[1] + self.size:
+                if projectile[1] >= asteroid[1] + asteroid[-2] or asteroid[1] >= projectile[1] + self.size:
                     xCheck = False 
-                
+            
                 if xCheck and yCheck:
                     gameState['score'] += 1
                     asteroid[-1] = 2
+                    self.asteroidObj.addAsteroid(asteroid[0], asteroid[1], )
