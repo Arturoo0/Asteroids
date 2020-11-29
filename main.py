@@ -5,6 +5,8 @@ import Player
 import Asteroid
 import Projectile
 import Scoreboard
+import GameState
+import Menu
 
 def main():
     pygame.init()
@@ -15,6 +17,7 @@ def main():
     asteroid = Asteroid.Asteroid(display)
     projectiles = Projectile.Projectile(display)
     scoreboard = Scoreboard.Scoreboard(display)
+    menu = Menu.Menu(display)
     
     running = True
 
@@ -23,20 +26,26 @@ def main():
         display.fill((0, 0, 0))
         for event in pygame.event.get():
             mainPlayer.trackKeyPresses(event)
+            menu.trackKeyPresses(event)
             if event.type == pygame.QUIT:
                 running = False
-        
-        mainPlayer.update(dt)
-        mainPlayer.draw()
 
-        asteroid.update(dt)
-        asteroid.draw()
+        if not GameState.gameState['inMenu']:
+            mainPlayer.update(dt)
+            mainPlayer.draw()
 
-        projectiles.update(dt)
-        projectiles.draw()
+            asteroid.update(dt)
+            asteroid.draw()
 
-        scoreboard.draw()
-        
+            projectiles.update(dt)
+            projectiles.draw()
+
+            scoreboard.draw()
+        else:
+            menu.draw()
+            menu.update()
+            
+
         pygame.display.update()
 
 if __name__== "__main__":
