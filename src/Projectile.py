@@ -46,6 +46,6 @@ class Projectile:
                     asteroid[-1] = 2
                     if asteroid[-2] > self.asteroidObj.sizeLimit: 
                         for i in range(2):
-                            newXComponent = asteroid[2] * r.uniform(.5,1)
-                            newYComponent = asteroid[3] * r.uniform(.5, 1)
+                            newXComponent = asteroid[2] * r.uniform(.3, .8)
+                            newYComponent = asteroid[3] * r.uniform(.3, .8)
                             self.asteroidObj.addAsteroid(asteroid[0] + newXComponent, asteroid[1] + newYComponent, newXComponent, newYComponent, asteroid[-2]//2)
