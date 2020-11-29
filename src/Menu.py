@@ -1,6 +1,7 @@
 from GameState import gameState
 import Draw
 import pygame
+import starfield
 
 class Menu: 
 
@@ -16,14 +17,17 @@ class Menu:
 		self.startTextTopLeft = (400 - (self.startText.get_width()//2), (self.startButtonTopLeft[1] * 2 + self.startButtonHeight)//2 - (self.startText.get_height()//2))
 		self.asteroidsTextTopLeft = (400 - (self.asteroidsText.get_width()//2), 200)
 		self.isHovering = False
+		self.starfield = starfield.Starfield(drawCtx, 200)
 
 	def draw(self):
 		self.drawStartButtonText()
 		self.drawStartButton()
 		self.drawAsteroidsText()
+		self.starfield.draw()
 	
-	def update(self):
+	def update(self, dt):
 		self.hoveringOverButton()
+		self.starfield.update(dt)
 			
 	def trackKeyPresses(self, event):
 		if event.type == pygame.MOUSEBUTTONDOWN:
