@@ -12,6 +12,7 @@ class Menu:
 		self.startButtonTopLeft = ((400 - (self.startButtonWidth//2)), 400)
 		self.startText = self.fontCtx.render('Start' , 1, (255,255,255))
 		self.startTextTopLeft = (400 - (self.startText.get_width()//2), (self.startButtonTopLeft[1] * 2 + self.startButtonHeight)//2 - (self.startText.get_height()//2))
+		self.isHovering = False
 
 	def draw(self):
 		self.drawStartButtonText()
@@ -26,12 +27,23 @@ class Menu:
 			xCheck = x >= self.startButtonTopLeft[0] and x <= self.startButtonTopLeft[0] + self.startButtonWidth
 			yCheck = y >= self.startButtonTopLeft[1] and y <= self.startButtonTopLeft[1] + self.startButtonHeight
 			if xCheck and yCheck: gameState['inMenu'] = False
-		
+	
+	def drawHoverEffect(self):
+		x, y = self.startButtonTopLeft
+		if self.isHovering:
+			for i in range(20):
+				offset = (i//2)
+				Draw.drawRect(self.drawCtx, (255, 255, 255), (x - offset, y - offset, self.startButtonWidth, self.startButtonHeight), fillType=1)
+
 	def hoveringOverButton(self):
 		x, y = pygame.mouse.get_pos()
 		xCheck = x >= self.startButtonTopLeft[0] and x <= self.startButtonTopLeft[0] + self.startButtonWidth
 		yCheck = y >= self.startButtonTopLeft[1] and y <= self.startButtonTopLeft[1] + self.startButtonHeight
-		if xCheck and yCheck: self.hoverEffect()
+		if xCheck and yCheck:
+			self.isHovering = True
+		else: self.isHovering = False
+		self.drawHoverEffect()
+
 
 	def drawStartButtonText(self):
 		x, y = self.startTextTopLeft
