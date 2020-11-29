@@ -43,4 +43,5 @@ class Projectile:
                 if xCheck and yCheck:
                     gameState['score'] += 1
                     asteroid[-1] = 2
-                    self.asteroidObj.addAsteroid(asteroid[0], asteroid[1], )
+                    if asteroid[-2] > self.asteroidObj: 
+                        self.asteroidObj.generateAsteroid(asteroid[-2]//2)

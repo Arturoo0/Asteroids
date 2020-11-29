@@ -9,6 +9,8 @@ class Asteroids:
         self.callInterval = 0
         self.xSpeed = 45
         self.ySpeed = 45
+        self.startingSize = 30
+        self.sizeLimit = self.startingSize//2
 
     def update(self, dt):
         self.callInterval += 1
