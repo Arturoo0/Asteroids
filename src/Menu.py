@@ -7,16 +7,20 @@ class Menu:
 	def __init__(self, drawCtx):
 		self.drawCtx = drawCtx
 		self.fontCtx = pygame.font.SysFont("Times New Roman", 60)
+		self.asteroidFontCtx = pygame.font.SysFont("Times New Roman", 120)
 		self.startButtonWidth = 300
 		self.startButtonHeight = 95
 		self.startButtonTopLeft = ((400 - (self.startButtonWidth//2)), 400)
 		self.startText = self.fontCtx.render('Start' , 1, (255,255,255))
+		self.asteroidsText = self.asteroidFontCtx.render('Asteroids' , 1, (255,255,255))
 		self.startTextTopLeft = (400 - (self.startText.get_width()//2), (self.startButtonTopLeft[1] * 2 + self.startButtonHeight)//2 - (self.startText.get_height()//2))
+		self.asteroidsTextTopLeft = (400 - (self.asteroidsText.get_width()//2), 200)
 		self.isHovering = False
 
 	def draw(self):
 		self.drawStartButtonText()
 		self.drawStartButton()
+		self.drawAsteroidsText()
 	
 	def update(self):
 		self.hoveringOverButton()
@@ -44,6 +48,9 @@ class Menu:
 		else: self.isHovering = False
 		self.drawHoverEffect()
 
+	def drawAsteroidsText(self):
+		x, y = self.asteroidsTextTopLeft
+		self.drawCtx.blit(self.asteroidsText, (x, y))
 
 	def drawStartButtonText(self):
 		x, y = self.startTextTopLeft
