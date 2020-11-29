@@ -3,7 +3,7 @@ import Draw as draw
 import math
 import Projectile
 import Entities
-from Asteroid import Asteroid
+from Asteroids import Asteroids
 from GameState import gameState
 
 class Player:
@@ -107,8 +107,8 @@ class Player:
     def detectPlayerCollision(self):
         for coord in self.polygonRepresentation:
             for asteroid in Entities.asteroids:
-                xCheck = coord[0] >= asteroid[0] and coord[0] <= asteroid[0] + Asteroid.size
-                yCheck = coord[1] >= asteroid[1] and coord[1] <= asteroid[1] + Asteroid.size
+                xCheck = coord[0] >= asteroid[0] and coord[0] <= asteroid[0] + asteroid[-2]
+                yCheck = coord[1] >= asteroid[1] and coord[1] <= asteroid[1] + asteroid[-2]
                 if xCheck and yCheck: 
                     gameState['lives'] -= 1
                     self.polygonRepresentation = [[30, 30], [40, 60], [20, 60]]

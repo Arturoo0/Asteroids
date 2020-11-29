@@ -2,7 +2,7 @@ import sys
 sys.path.append('./src')
 import pygame
 import Player
-import Asteroid
+import Asteroids
 import Projectile
 import Scoreboard
 import GameState
@@ -14,7 +14,7 @@ def main():
     display = pygame.display.set_mode((800, 600))
 
     mainPlayer = Player.Player(display, 10)
-    asteroid = Asteroid.Asteroid(display)
+    asteroid = Asteroids.Asteroids(display)
     projectiles = Projectile.Projectile(display)
     scoreboard = Scoreboard.Scoreboard(display)
     menu = Menu.Menu(display)
