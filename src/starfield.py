@@ -2,13 +2,16 @@ import Draw
 import random as r
 
 class Star:
-    def __init__(x, y, size):
+    def __init__(self, x, y, size, speed):
+        self.x = x
+        self.y = y
+        self.size = size
+        self.speed = speed
 
 class Starfield:
-
     def __init__(self, drawCtx, density): # density is the total amount of on screen units
         self.drawCtx = drawCtx
-        self.stars = [(r.randint(0, 800), r.randint(-20, 0), r.randint(1, 3)) for star in range(density)]
+        self.stars = [Star(r.randint(0, 800), r.randint(0, 600), r.randint(1, 3), r.randint(1,10)) for star in range(density)]
 
     def draw(self):
         self.drawStars()
@@ -17,17 +20,15 @@ class Starfield:
         self.updateStars(dt)
 
     def updateStars(self, dt):
-        for pos in range(len(self.stars)):
-            x, y, vel = self.stars[pos]
-            if y > 600: 
-                self.stars[pos] = (x, -10, vel)
+        for star in self.stars:
+            if star.y > 600: 
+                star.y = -5
             else:
-                self.stars[pos] = (x, y + (vel * dt), vel)
+                star.y += (star.speed * dt)
             
     def drawStars(self):
         for star in self.stars:
-            size = r.randint(1,3)
-            Draw.drawRect(self.drawCtx, (255, 255, 255), (star[0], star[1], size, size))
+            Draw.drawRect(self.drawCtx, (255, 255, 255), (star.x, star.y, star.size, star.size))
 
 
 
