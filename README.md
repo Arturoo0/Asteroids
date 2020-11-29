@@ -7,5 +7,3 @@ Asteroids like clone made with Pygame.
 TODO
 
 - Asteroid split on collision
-- Start menu
-- Fine tune shooting and player mirror mechanic 
